@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  mysql:
+    build:
+      context: ./containers/mysql
+    ports:
+        - "3306:3306"
+    entrypoint: "/root/run.sh"
+
+  oracle:
+    build:
+      context: ./containers/oracle
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    ports:
+        - "8080:8080"
+        - "1521:1521"
+    entrypoint: "/root/run.sh"
