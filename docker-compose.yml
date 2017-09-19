@@ -5,7 +5,7 @@ services:
     build:
       context: ./containers/mysql
     ports:
-        - "3306:3306"
+        - "127.0.0.1:3306:3306"
     entrypoint: "/root/run.sh"
 
   oracle:
@@ -16,6 +16,6 @@ services:
         limits:
           memory: 1G
     ports:
-        - "8080:8080"
-        - "1521:1521"
+        - "127.0.0.1:8080:8080"
+        - "127.0.0.1:1521:1521"
     entrypoint: "/root/run.sh"

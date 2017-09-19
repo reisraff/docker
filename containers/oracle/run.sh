@@ -1,6 +1,5 @@
 #!/bin/bash
 
-/etc/init.d/oracle-xe stop
-/etc/init.d/oracle-xe start
+/start.sh
 
 tail -f /dev/null
