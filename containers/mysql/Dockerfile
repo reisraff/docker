@@ -1,10 +1,10 @@
-FROM ubuntu:xenial
+FROM debian:jessie
 
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN apt-get update && apt-get install -y mysql-server mysql-client
 
-RUN sed -i -e "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
+RUN sed -i -e "s/127.0.0.1/0.0.0.0/g" /etc/mysql/my.cnf
 
 RUN /etc/init.d/mysql start && \
 sleep 5 && \
