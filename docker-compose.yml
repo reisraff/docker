@@ -2,11 +2,13 @@ version: '3.3'
 
 services:
   mysql:
-    build:
-      context: ./containers/mysql
+    image: mysql:5.7.20
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_PORT=3306
     ports:
         - "127.0.0.1:3306:3306"
-    entrypoint: "/root/run.sh"
 
   oracle:
     build:
