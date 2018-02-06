@@ -7,7 +7,7 @@ services:
       args:
         - PY_VERSION=2.7
     volumes:
-      - "~/Projects:/home/docker/workspace"
+      - "~/Projects:/home/docker/Projects"
     entrypoint: "/home/docker/run.sh"
 
   python3:
@@ -16,7 +16,7 @@ services:
       args:
         - PY_VERSION=3
     volumes:
-      - "~/Projects:/home/docker/workspace"
+      - "~/Projects:/home/docker/Projects"
     entrypoint: "/home/docker/run.sh"
 
   php:
@@ -26,7 +26,7 @@ services:
       - "127.0.0.1:8000:8000"
       - "127.0.0.1:8080:8080"
     volumes:
-      - "~/Projects:/home/docker/workspace"
+      - "~/Projects:/home/docker/Projects"
     networks:
       - default
     entrypoint: "/home/docker/run.sh"
@@ -37,7 +37,7 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      - "~/Projects:/home/docker/workspace"
+      - "~/Projects:/home/docker/Projects"
     entrypoint: "/home/docker/run.sh"
 
   mysql:
