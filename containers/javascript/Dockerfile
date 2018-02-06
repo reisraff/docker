@@ -11,7 +11,7 @@ RUN apt-get update \
     && npm install --global bower gulp gulp-cli \
     && useradd -ms /bin/bash docker \
     && echo 'docker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && sudo -H -u docker bash -c 'sudo chown -R $(whoami) ~/.npm' \
+    && sudo -H -u docker bash -c 'mkdir ~/.npm && sudo chown -R $(whoami) ~/.npm' \
     && echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
 COPY ./run.sh /home/docker/run.sh

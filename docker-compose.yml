@@ -1,11 +1,22 @@
 version: '3.3'
 
 services:
-  python:
+  python2:
     build:
       context: ./containers/python
+      args:
+        - PY_VERSION=2.7
     volumes:
-      - "~/workspace:/home/docker/workspace"
+      - "~/Projects:/home/docker/workspace"
+    entrypoint: "/home/docker/run.sh"
+
+  python3:
+    build:
+      context: ./containers/python
+      args:
+        - PY_VERSION=3
+    volumes:
+      - "~/Projects:/home/docker/workspace"
     entrypoint: "/home/docker/run.sh"
 
   php:
@@ -15,7 +26,7 @@ services:
       - "127.0.0.1:8000:8000"
       - "127.0.0.1:8080:8080"
     volumes:
-      - "~/workspace:/home/docker/workspace"
+      - "~/Projects:/home/docker/workspace"
     networks:
       - default
     entrypoint: "/home/docker/run.sh"
@@ -26,7 +37,7 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      - "~/workspace:/home/docker/workspace"
+      - "~/Projects:/home/docker/workspace"
     entrypoint: "/home/docker/run.sh"
 
   mysql:
