@@ -3,7 +3,7 @@ version: '3.3'
 services:
   python2:
     image: reisraff/python2:latest
-    container_name: docker_python2
+    container_name: reisraff/python2
     build:
       context: ./containers/python
       args:
@@ -14,7 +14,7 @@ services:
 
   python3:
     image: reisraff/python3:latest
-    container_name: docker_python3
+    container_name: reisraff/python3
     build:
       context: ./containers/python
       args:
@@ -25,7 +25,7 @@ services:
 
   php:
     image: reisraff/php:latest
-    container_name: docker_php
+    container_name: reisraff/php
     build:
       context: ./containers/php
     ports:
@@ -39,7 +39,7 @@ services:
 
   javascript:
     image: reisraff/javascript:latest
-    container_name: docker_javascript
+    container_name: reisraff/javascript
     build:
       context: ./containers/javascript
     ports:
@@ -50,7 +50,7 @@ services:
 
   mysql:
     image: reisraff/mysql:latest
-    container_name: docker_mysql
+    container_name: reisraff/mysql
     build:
       context: ./containers/mysql
     environment:
@@ -65,6 +65,12 @@ services:
       default:
         aliases:
           - mysql.dockerlink
+
+  kali:
+    image: reisraff/kali:latest
+    container_name: reisraff/kali
+    build:
+      context: ./containers/kali
 
 networks:
   default:
