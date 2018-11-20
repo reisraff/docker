@@ -3,7 +3,7 @@ FROM kalilinux/kali-linux-docker:latest
 RUN apt-get update && apt-get install kali-linux-all -y
 
 RUN apt-get update && \
-    apt-get install exiftool git eog && \
+    apt-get -y install exiftool git eog && \
     gem install zsteg && \
     wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar && chmod +x stegsolve.jar && \
     pip install pwn && \
