@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.4'
 
 services:
   python2:
@@ -87,6 +87,10 @@ services:
         USER: ${USER:-docker}
         UID: ${UID:-1000}
         GID: ${GID:-1000}
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
     networks:
       - default
 
