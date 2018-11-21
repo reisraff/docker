@@ -10,3 +10,15 @@ RUN apt-get update && \
     git clone https://github.com/longld/peda.git ~/peda && \
     echo "source ~/peda/peda.py" >> ~/.gdbinit && \
     echo "DONE! debug your program with gdb and enjoy"
+
+ARG USER
+ARG UID
+ARG GID
+RUN export C_USER=$USER \
+    && export C_UID=$UID \
+    && export C_GID=$GID \
+    && groupadd -g $C_GID $C_USER \
+    && useradd -ms /bin/bash -u $C_UID -g $C_GID $C_USER \
+    && apt-get update && apt-get install -y sudo \
+    && echo "$C_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && echo "User $C_USER has been created"

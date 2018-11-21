@@ -1,5 +1,5 @@
 # README
 
 ```bash
-# update-alternatives --config php
+update-alternatives --config php
 ```

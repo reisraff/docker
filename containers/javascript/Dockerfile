@@ -7,15 +7,19 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
     && npm install --global bower gulp gulp-cli \
-    && useradd -ms /bin/bash docker \
-    && echo 'docker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && sudo -H -u docker bash -c 'mkdir ~/.npm && sudo chown -R $(whoami) ~/.npm' \
     && echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
-COPY ./run.sh /home/docker/run.sh
-RUN chmod +x /home/docker/run.sh
-
-USER docker
-WORKDIR /home/docker/
+ARG USER
+ARG UID
+ARG GID
+RUN export C_USER=$USER \
+    && export C_UID=$UID \
+    && export C_GID=$GID \
+    && groupadd -g $C_GID $C_USER \
+    && useradd -ms /bin/bash -u $C_UID -g $C_GID $C_USER \
+    && apt-get update && apt-get install -y sudo \
+    && echo "$C_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && sudo -H -u $C_USER bash -c 'mkdir ~/.npm && sudo chown -R $(whoami) ~/.npm' \
+    && echo "User $C_USER has been created"

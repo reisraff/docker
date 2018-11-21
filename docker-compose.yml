@@ -7,10 +7,12 @@ services:
     build:
       context: ./containers/python
       args:
-        - PY_VERSION=2.7
-    volumes:
-      - "~/Projects:/home/docker/Projects"
-    entrypoint: "/home/docker/run.sh"
+        PY_VERSION: 2.7
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    networks:
+      - default
 
   python3:
     image: reisraff/python3:latest
@@ -18,41 +20,51 @@ services:
     build:
       context: ./containers/python
       args:
-        - PY_VERSION=3
-    volumes:
-      - "~/Projects:/home/docker/Projects"
-    entrypoint: "/home/docker/run.sh"
+        PY_VERSION: 3
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    networks:
+      - default
 
   php:
     image: reisraff/php:latest
     container_name: php
     build:
       context: ./containers/php
+      args:
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     ports:
       - "127.0.0.1:8000:8000"
       - "127.0.0.1:8080:8080"
-    volumes:
-      - "~/Projects:/home/docker/Projects"
     networks:
       - default
-    entrypoint: "/home/docker/run.sh"
 
   javascript:
     image: reisraff/javascript:latest
     container_name: javascript
     build:
       context: ./containers/javascript
+      args:
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     ports:
       - "127.0.0.1:3000:3000"
-    volumes:
-      - "~/Projects:/home/docker/Projects"
-    entrypoint: "/home/docker/run.sh"
+    networks:
+      - default
 
   mysql:
     image: reisraff/mysql:latest
     container_name: mysql
     build:
       context: ./containers/mysql
+      args:
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_ROOT_HOST=%
@@ -71,6 +83,12 @@ services:
     container_name: kali
     build:
       context: ./containers/kali
+      args:
+        USER: ${USER:-docker}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    networks:
+      - default
 
 networks:
   default:
