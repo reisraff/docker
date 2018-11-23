@@ -5,7 +5,7 @@ ENV TERM=linux
 ARG PY_VERSION
 
 RUN export PY_VERSION=$PY_VERSION && apt-get update \
-    && apt-get -y install curl wget ca-certificates sudo \
+    && apt-get -y install curl build-essential wget ca-certificates sudo \
         python$(echo $PY_VERSION) python$(echo $PY_VERSION)-dev \
     && ln -s /usr/bin/python$(echo $PY_VERSION) /usr/bin/python \
     && wget -q -O- https://bootstrap.pypa.io/get-pip.py | python
