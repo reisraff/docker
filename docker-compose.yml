@@ -55,6 +55,7 @@ services:
       - "127.0.0.1:3000:3000"
     networks:
       - default
+    privileged: true
 
   mysql:
     image: reisraff/mysql:latest

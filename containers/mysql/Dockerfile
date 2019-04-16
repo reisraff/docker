@@ -1,4 +1,4 @@
-FROM mysql:5.7.20
+FROM mysql:5.7
 
 ENV TERM=linux
 
