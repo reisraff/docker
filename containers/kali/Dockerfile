@@ -6,15 +6,7 @@ RUN apt-get update \
     && apt-get -y install gcc-multilib exiftool git eog \
     && gem install zsteg \
     && wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar && chmod +x stegsolve.jar \
-    && pip install pwn \
-    && curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
-          | grep browser_download_url \
-          | grep x86_64 \
-          | grep linux-gnu \
-          | cut -d '"' -f 4 \
-          | wget -qi - \
-    && dpkg -i *deb \
-    && rm -f *deb
+    && pip install pwn
 
 ARG HOSTUSER
 ARG HOSTUID
