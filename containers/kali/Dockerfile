@@ -9,7 +9,8 @@ RUN apt-get update \
     && pip install pwn \
     && curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
           | grep browser_download_url \
-          | grep 'bat_0.9.0_amd64.deb' \
+          | grep x86_64 \
+          | grep linux-gnu \
           | cut -d '"' -f 4 \
           | wget -qi - \
     && dpkg -i *deb \
