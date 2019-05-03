@@ -78,6 +78,7 @@ services:
       default:
         aliases:
           - mysql.dockerlink
+
   postgres:
     image: reisraff/postgres:latest
     container_name: postgres
@@ -90,6 +91,10 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
+    networks:
+      default:
+        aliases:
+          - postgres.dockerlink
 
   kali:
     image: reisraff/kali:latest
