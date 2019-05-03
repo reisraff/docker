@@ -78,6 +78,18 @@ services:
       default:
         aliases:
           - mysql.dockerlink
+  postgres:
+    image: reisraff/postgres:latest
+    container_name: postgres
+    build:
+      context: ./containers/postgres
+      args:
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
 
   kali:
     image: reisraff/kali:latest
