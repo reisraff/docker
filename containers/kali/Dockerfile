@@ -19,5 +19,6 @@ RUN export IMGUSER=$HOSTUSER \
     && apt-get update && apt-get install -y sudo \
     && echo "$IMGUSER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
     && sudo -H -u $IMGUSER bash -c 'git clone https://github.com/longld/peda.git ~/peda' \
+    && sudo -H -u $IMGUSER bash -c 'echo "source ~/peda/peda.py" >> ~/.gdbinit' \
     && echo "DONE! debug your program with gdb and enjoy" \
     && echo "User $IMGUSER($IMGUID:$IMGGID) has been created"
