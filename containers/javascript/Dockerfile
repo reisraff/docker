@@ -3,12 +3,12 @@ FROM ubuntu:xenial
 ENV TERM=linux
 
 RUN apt-get update \
-    && apt-get -y install curl ca-certificates sudo \
+    && apt-get -y install curl ca-certificates git sudo \
     && curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
-    && npm install --global bower gulp gulp-cli \
+    && npm install --global yarn bower gulp gulp-cli \
     && echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
 ARG HOSTUSER
