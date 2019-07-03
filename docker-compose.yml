@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   python2:
-    image: reisraff/python2:latest
+    image: reisraff/python:2
     container_name: python2
     build:
       context: ./containers/python
@@ -15,7 +15,7 @@ services:
       - default
 
   python3:
-    image: reisraff/python3:latest
+    image: reisraff/python:3
     container_name: python3
     build:
       context: ./containers/python
@@ -27,12 +27,13 @@ services:
     networks:
       - default
 
-  php:
-    image: reisraff/php:latest
+  php7.2:
+    image: reisraff/php:7.2
     container_name: php
     build:
       context: ./containers/php
       args:
+        PHP_VERSION: 7.2
         HOSTUSER: ${HOSTUSER:-docker}
         HOSTUID: ${HOSTUID:-1000}
         HOSTGID: ${HOSTGID:-1000}
@@ -42,12 +43,77 @@ services:
     networks:
       - default
 
-  javascript:
-    image: reisraff/javascript:latest
-    container_name: javascript
+  php7.3:
+    image: reisraff/php:7.3
+    container_name: php
     build:
-      context: ./containers/javascript
+      context: ./containers/php
       args:
+        PHP_VERSION: 7.3
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8080:8080"
+    networks:
+      - default
+
+  node8:
+    image: reisraff/node:8
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 8
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - default
+    privileged: true
+
+  node10:
+    image: reisraff/node:10
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 10
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - default
+    privileged: true
+
+  node11:
+    image: reisraff/node:11
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 11
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - default
+    privileged: true
+
+  node12:
+    image: reisraff/node:12
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 12
         HOSTUSER: ${HOSTUSER:-docker}
         HOSTUID: ${HOSTUID:-1000}
         HOSTGID: ${HOSTGID:-1000}
