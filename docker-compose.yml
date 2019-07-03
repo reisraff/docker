@@ -59,6 +59,22 @@ services:
     networks:
       - default
 
+  node9:
+    image: reisraff/node:9
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 9
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - default
+    privileged: true
+
   node8:
     image: reisraff/node:8
     container_name: node
