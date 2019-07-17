@@ -6,7 +6,14 @@ RUN apt-get update \
     && apt-get -y install gcc-multilib exiftool git eog \
     && gem install zsteg \
     && wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar && chmod +x stegsolve.jar \
-    && pip install pwn
+    && pip install pwn \
+    && wget https://www.ghidra-sre.org/ghidra_9.0.4_PUBLIC_20190516.zip \
+    && unzip ghidra*.zip \
+    && rm -rf ghidra*.zip \
+    && sudo mv $(ls ./ | grep ghidra) /opt/ghidra \
+    && echo -e '\nexport PATH=$PATH:/opt/ghidra/\n' | sudo tee -a /etc/bash.bashrc \
+    && echo -e '#!/bin/bash\n\nghidraRun 2>&1 &' | sudo tee /usr/bin/ghidra \
+    && sudo chmod +x /usr/bin/ghidra
 
 ARG HOSTUSER
 ARG HOSTUID
