@@ -5,7 +5,7 @@ ENV TERM=linux
 ARG NODE_VERSION
 
 RUN apt-get update \
-    && apt-get -y install curl ca-certificates git sudo \
+    && apt-get -y install curl ca-certificates git sudo build-essential \
     && curl -sL https://deb.nodesource.com/setup_$(echo $NODE_VERSION).x | sudo -E bash - \
     && apt-get install -y nodejs \
     && apt-get clean \
