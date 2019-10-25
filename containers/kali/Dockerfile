@@ -29,5 +29,6 @@ RUN export IMGUSER=$HOSTUSER \
     # && sudo -H -u $IMGUSER bash -c 'git clone https://github.com/longld/peda.git ~/peda' \
     # && sudo -H -u $IMGUSER bash -c 'echo "source ~/peda/peda.py" >> ~/.gdbinit' \
     && sudo -H -u $IMGUSER bash -c 'wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh' \
+    && sudo -H -u $IMGUSER bash -c 'echo "" >> ~/.bashrc && echo "# GEF needing" >> ~/.bashrc && echo "export LC_CTYPE=C.UTF-8" >> ~/.bashrc && echo "" >> ~/.bashrc' \
     && echo "DONE! debug your program with gdb (GEF) and enjoy" \
     && echo "User $IMGUSER($IMGUID:$IMGGID) has been created"
