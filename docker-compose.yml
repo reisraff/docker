@@ -106,7 +106,7 @@ services:
         HOSTUID: ${HOSTUID:-1000}
         HOSTGID: ${HOSTGID:-1000}
     ports:
-      - "127.0.0.1:3000:3000"
+      - "0.0.0.0:3000:3000"
     networks:
       - default
     privileged: true
@@ -191,6 +191,10 @@ services:
         HOSTUSER: ${HOSTUSER:-docker}
         HOSTUID: ${HOSTUID:-1000}
         HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:81:81"
+      - "127.0.0.1:9000:9000"
     security_opt:
       - seccomp:unconfined
     cap_add:
