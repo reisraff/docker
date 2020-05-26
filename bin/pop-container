@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import os
 import re
+import subprocess
 
 
 def get_ports_from_container(file_name, container):
@@ -66,8 +67,20 @@ env_file = os.path.join(root_folder, '.env')
 user = 'root'
 if os.path.isfile(env_file):
     env_content = open(env_file, 'r').read().encode('utf8')
-    user_result = re.findall('USER=(.*)', env_content)
+    user_result = re.findall('USER=(.*)', env_content.decode())
     user = user_result[0] if len(user_result) else user
+
+get_id = "docker ps | grep '{}/{}:latest'".format(user, container_name)
+try:
+    output = subprocess.check_output(get_id, shell=True).strip()
+except Exception:
+    output = b""
+container_id = re.findall('^[a-z0-9]+', output.decode())
+
+if len(container_id):
+    command = 'docker exec -it {} bash'.format(container_id[0])
+    os.system(command)
+    exit(0)
 
 ports = get_ports_from_container(docker_compose_file, container_name)
 
@@ -75,32 +88,21 @@ ports_string = ''
 for port in ports:
     ports_string = ports_string + ' -p {}'.format(port)
 
-command = """
-xhost +SI:localuser:{} \
-&& docker-compose \
--f {} \
-run \
---rm \
--e DISPLAY={} \
--v /tmp/.X11-unix:/tmp/.X11-unix \
--v {}:/home/{}/workdir \
--w /home/{} \
--u {} \
-{} \
-{} \
-bash
-"""
-
-command = command.format(
-    user,
-    docker_compose_file,
-    os.environ['DISPLAY'],
-    cwd,
-    user,
-    user,
-    user,
-    ports_string,
-    container_name
-)
+command = f"""
+xhost +SI:localuser:root && \\
+xhost +SI:localuser:{user} \\
+&& docker-compose \\
+-f {docker_compose_file} \\
+run \\
+--rm \\
+-e DISPLAY={os.environ['DISPLAY']} \\
+-v /tmp/.X11-unix:/tmp/.X11-unix \\
+-v /opt:/opt \\
+-v {cwd}:/home/{user}/workdir \\
+-w /home/{user} \\
+-u {user} \\
+{ports_string} \\
+{container_name} \\
+bash"""
 
 os.system(command)

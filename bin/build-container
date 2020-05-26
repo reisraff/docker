@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import os
+import re
 
 help_message = """
 BUILD-CONTAINER
@@ -23,11 +24,20 @@ container_name = sys.argv[1]
 docker_compose_bin_folder = os.path.dirname(os.path.realpath(__file__))
 root_folder = os.path.dirname(docker_compose_bin_folder)
 docker_compose_file = os.path.join(root_folder, 'docker-compose.yml')
+env_file = os.path.join(root_folder, '.env')
+env = open(env_file, 'r').read()
+hostuser = re.findall(r'HOSTUSER=(.*)', env)[0]
+hostuid = re.findall(r'HOSTUID=(.*)', env)[0]
+hostgid = re.findall(r'HOSTGID=(.*)', env)[0]
 
-command = 'docker-compose -f {} build --no-cache --pull --force-rm {}'
-command = command.format(
-    docker_compose_file,
-    container_name
-)
+buildargs = ' '.join([
+    f' --build-arg HOSTUSER={hostuser}'
+    f' --build-arg HOSTUID={hostuid}'
+    f' --build-arg HOSTGID={hostgid}'
+])
+
+# env
+
+command = f'docker-compose -f {docker_compose_file} build --no-cache --pull --force-rm {buildargs} {container_name}'
 
 os.system(command)

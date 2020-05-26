@@ -7,7 +7,7 @@ ARG NODE_VERSION
 RUN apt-get update \
     && apt-get -y install curl ca-certificates git sudo build-essential tar bzip2\
     && curl -sL https://deb.nodesource.com/setup_$(echo $NODE_VERSION).x | sudo -E bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y nodejs build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
     && npm install --global yarn bower gulp gulp-cli \

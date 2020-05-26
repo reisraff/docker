@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import os
@@ -21,10 +21,6 @@ docker_compose_bin_folder = os.path.dirname(os.path.realpath(__file__))
 root_folder = os.path.dirname(docker_compose_bin_folder)
 docker_compose_file = os.path.join(root_folder, 'docker-compose.yml')
 
-command = 'docker-compose -f {} stop {}'
-command = command.format(
-    docker_compose_file,
-    container_name
-)
+command = f'docker-compose -f {docker_compose_file} stop {container_name}'
 
 os.system(command)
