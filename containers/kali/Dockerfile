@@ -3,7 +3,6 @@ FROM kalilinux/kali:latest
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get -y install gcc-multilib exiftool git eog gobuster \
-    && gem install zsteg \
     && pip install pwn requests \
     && pip3 install pwn requests
 
