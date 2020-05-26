@@ -1,7 +1,5 @@
 FROM kalilinux/kali:latest
 
-RUN apt-get update && apt-get install kali-linux-all -y
-
 RUN apt-get update \
     && apt-get -y install gcc-multilib exiftool git eog gobuster \
     && gem install zsteg \
