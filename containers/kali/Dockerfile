@@ -1,8 +1,10 @@
-FROM kalilinux/kali:latest
+FROM kalilinux/kali-rolling:latest
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get -y install gcc-multilib exiftool git eog gobuster \
+    && apt-get -y install iputils-ping vim netcat iproute2 net-tools watch mlocate build-essential metasploit-framework gcc-multilib exiftool git eog gobuster python2.7 python2.7-dev python3-dev python3-pip \
+    && curl https://bootstrap.pypa.io/get-pip.py | python2.7 \
+    && ln -s /usr/bin/python2.7 /usr/bin/python2 \
     && pip install pwn requests \
     && pip3 install pwn requests
 
