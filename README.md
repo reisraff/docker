@@ -18,12 +18,6 @@ build-container [container-name]
 ps-containers
 ```
 
-## Run Container
-
-```bash
-run-container [container-name]
-```
-
 ## UP Container
 
 ```bash
@@ -36,8 +30,8 @@ up-container [container-name] [-d]
 stop-container [container-name]
 ```
 
-## Exec Container
+## Pop Container
 
 ```bash
-exec-container [container-name]
+pop-container [container-name]
 ```
