@@ -70,8 +70,11 @@ if os.path.isfile(env_file):
     user_result = re.findall('USER=(.*)', env_content.decode())
     user = user_result[0] if len(user_result) else user
 
-get_id = "docker ps | grep '{}/{}:latest'".format(user, container_name)
 try:
+    get_image_name = f"grep {container_name} -A5 {docker_compose_file} | grep image | sed -re 's/image:(.*)/\\1/'"
+    output = subprocess.check_output(get_image_name, shell=True).strip().decode()
+
+    get_id = "docker ps | grep '{}'".format(output)
     output = subprocess.check_output(get_id, shell=True).strip()
 except Exception:
     output = b""
