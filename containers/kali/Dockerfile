@@ -2,7 +2,12 @@ FROM kalilinux/kali-rolling:latest
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get -y install iputils-ping vim netcat iproute2 net-tools watch mlocate build-essential metasploit-framework gcc-multilib exiftool git eog gobuster python2.7 python2.7-dev python3-dev python3-pip \
+    && apt-get -y install arping dnsutils exploitdb ftp gdb git hashcat hashcat-utils hydra hydra-gtk impacket-scripts \
+        iputils-arping john johnny metasploit-framework msfpc nasm ncat netcat-traditional nmap ollydbg \
+        openssh-server p7zip-full seclists socat sqlmap tcpdump tor unar unrar vim wfuzz \
+        windows-binaries windows-privesc-check winexe wireshark wordlists wpscan zip iputils-ping \
+        netcat iproute2 net-tools watch mlocate build-essential metasploit-framework gcc-multilib exiftool \
+        eog gobuster python2.7 python2.7-dev python3-dev python3-pip \
     && curl https://bootstrap.pypa.io/get-pip.py | python2.7 \
     && ln -s /usr/bin/python2.7 /usr/bin/python2 \
     && pip install pwn requests \
