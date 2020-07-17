@@ -2,7 +2,7 @@ FROM kalilinux/kali-rolling:latest
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get -y install dnsutils exploitdb ftp gdb git hashcat hashcat-utils hydra hydra-gtk impacket-scripts \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsutils smbmap smbclient exploitdb ftp gdb git hashcat hashcat-utils hydra hydra-gtk impacket-scripts \
         iputils-arping john johnny metasploit-framework msfpc nasm ncat netcat-traditional nmap ollydbg \
         openssh-server p7zip-full seclists socat sqlmap tcpdump tor unar unrar vim wfuzz \
         windows-binaries windows-privesc-check winexe wireshark wordlists wpscan zip iputils-ping \
