@@ -13,6 +13,14 @@ RUN apt-get update \
     && pip install pwn requests \
     && pip3 install pwn requests
 
+RUN apt-get update && apt-get install -y software-properties-common \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A6DCF7707EBC211F \
+    && apt-add-repository "deb http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu focal main" \
+    && apt update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y firefox-esr libcanberra-gtk-module libcanberra-gtk3-module mesa-utils libgl1-mesa-glx \
+    && export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/jdk-11.0.8+10/bin/ \
+    && export JAVA_HOME=/opt/java/jdk-11.0.8+10/
+
 ARG HOSTUSER
 ARG HOSTUID
 ARG HOSTGID
