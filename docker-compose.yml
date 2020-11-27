@@ -95,6 +95,22 @@ services:
     networks:
       - default
 
+  php8.0:
+    image: reisraff/php:8.0
+    container_name: php
+    build:
+      context: ./containers/php
+      args:
+        PHP_VERSION: 8.0
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8080:8080"
+    networks:
+      - default
+
   node9:
     image: reisraff/node:9
     container_name: node
