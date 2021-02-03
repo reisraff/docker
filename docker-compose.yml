@@ -252,6 +252,7 @@ services:
     networks:
       - default
     privileged: true
+    shm_size: 1G
 
 networks:
   default:

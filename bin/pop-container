@@ -101,6 +101,8 @@ run \\
 -e DISPLAY={os.environ['DISPLAY']} \\
 -v /tmp/.X11-unix:/tmp/.X11-unix \\
 -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket \\
+-v {os.environ['XAUTHORITY']}:/xauthority:ro \\
+-e XAUTHORITY='/xauthority' \\
 -v /opt:/opt \\
 -v {cwd}:/home/{user}/workdir \\
 -w /home/{user} \\
