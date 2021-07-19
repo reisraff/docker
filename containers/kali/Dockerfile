@@ -8,7 +8,7 @@ RUN apt-get update \
         windows-binaries windows-privesc-check winexe wireshark wordlists wpscan zip iputils-ping \
         netcat iproute2 net-tools watch mlocate build-essential metasploit-framework gcc-multilib exiftool \
         eog gobuster python2.7 python2.7-dev python3-dev python3-pip \
-    && curl https://bootstrap.pypa.io/get-pip.py | python2.7 \
+    && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python2.7 \
     && ln -s /usr/bin/python2.7 /usr/bin/python2 \
     && pip install pwn requests \
     && pip3 install pwn requests

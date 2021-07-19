@@ -105,9 +105,6 @@ services:
         HOSTUSER: ${HOSTUSER:-docker}
         HOSTUID: ${HOSTUID:-1000}
         HOSTGID: ${HOSTGID:-1000}
-    ports:
-      - "127.0.0.1:8000:8000"
-      - "127.0.0.1:8080:8080"
     networks:
       - default
 
@@ -177,6 +174,22 @@ services:
 
   node12:
     image: reisraff/node:12
+    container_name: node
+    build:
+      context: ./containers/node
+      args:
+        NODE_VERSION: 12
+        HOSTUSER: ${HOSTUSER:-docker}
+        HOSTUID: ${HOSTUID:-1000}
+        HOSTGID: ${HOSTGID:-1000}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - default
+    privileged: true
+
+  node14:
+    image: reisraff/node:14
     container_name: node
     build:
       context: ./containers/node
